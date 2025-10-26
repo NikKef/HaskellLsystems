@@ -1,0 +1,39 @@
+cabal-version:      3.0
+-- The name of the package.
+name:               lsystems
+
+version:            0.1.0.0
+
+synopsis:           L-Systems
+description:        Implementation of 2D, 3D and probabilistic LSystems
+
+author:             Nikolas Kefalonitis
+maintainer:         nikolaskefalonitis@gmail.com
+build-type:         Simple
+
+common common-settings
+    -- Options to pass to GHC, in this case, we want to turn on warnings
+    ghc-options: -Wtabs -Wunused-binds -Wmissing-signatures
+    -- Base language which the package is written in.
+    default-language: GHC2021
+    -- The range of GHC base library verisons that are supported
+    build-depends:    base >=4.13 && <5,
+                      containers,
+                      random,
+                      matrix
+
+library
+    import:           common-settings
+    -- Modules exported by the library.
+    exposed-modules:  Renderer, LSystems, Examples, IC.Graphics, IC.Colour
+    -- Directories containing source files.
+    hs-source-dirs:   src
+    -- Turns out, while GHCup installs the right libraries, it doesn't place them on the path
+    -- this helps with that :)
+    if os(windows)
+        extra-lib-dirs: C:/ghcup/msys64/mingw64/bin
+    -- Turns out, on Macs, the graphics library cannot run on a separate thread, which GHCi does
+    -- this disables that behaviour so it can work properly.
+    if os(darwin)
+        ghc-options:  -fno-ghci-sandbox
+    build-depends:    GLUT >=2.7 && <2.8

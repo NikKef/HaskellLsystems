@@ -1,2 +1,2 @@
-# HaskellLsystems
-This project started as a homework exercise on Haskell LSystems as part of the 1st year undergraduate Computing course at Imperial College London. The project is extended to support a 3D-like LSystem generation as well as probabilistic LSystems.
+# Haskell LSystems
+This project implements regular 2D Lsystems, probabilistic LSystems and 3D Lsystems.
