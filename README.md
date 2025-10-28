@@ -51,6 +51,10 @@ $ cabal repl
 > drawLSystem2 True arrowHead 6 Red
 ```
 
+<p align="center">
+  <img src="images/im2.png" alt="3D Sphere L-System" width="440"/>
+</p>
+
 2) You can explore the `Examples.hs` for LSystem examples, which includes 2D, 3D and probabilistic systems. You can also define your own LSystems. The main functions to render LSystems are:
 
 ```bash
@@ -60,10 +64,12 @@ $ cabal repl
 > drawLSystem2col
 # This draws a probabilistic 2D LSystem
 > drawProbLSystem2
-# This draws a probabilistic 2D LSystem that outputs the same result each time the same seed is given
+# This draws a probabilistic 2D LSystem that outputs
+# the same result each time the same seed is given
 > drawProbLSystem2WithSeed
 # This draws a probabilistic 2D LSystem with changing colour
 > drawProbLSystem2col
-# This draws the 3D Shere; a similar function can be used to draw any 3D LSystem you define. Feel free to adjust the parameters.
+# This draws the 3D Shere; a similar function can be used to
+# draw any 3D LSystem you define. Feel free to adjust the parameters.
 > drawSphere3D
 ```

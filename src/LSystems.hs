@@ -1,6 +1,3 @@
--- Use the following command to generate the submitted image:
--- ghci> drawSphere3D False
-
 module LSystems ( LSystem(LSystem), ColouredLine, Command(..)
                 , angle, axiom, rules, lookupChar
                 , expandOne, expand, move, parse, trace1, trace2, trace3, trace2col
@@ -20,7 +17,7 @@ import System.Random (randomIO, mkStdGen, StdGen, random)
 
 import Data.Maybe (mapMaybe)
 
--- Part 1
+-- Basic 2D LSystem Implementation
 ----------------------------------------------------------
 type Rules a = [(Char, [a])]
 data LSystem = LSystem Float [Char] (Rules Char)
@@ -53,7 +50,6 @@ lookupChar rs searchVal = justVal
   where
     (Just justVal) = lookup searchVal rs
 
--- Part 2: Expansion and Parsing
 data Command = F | L | R | B [Command] deriving Show
 
 {-|
@@ -261,8 +257,6 @@ trace3 cs t col = reverse (trace3' cs initialState [] [])
 
     trace3' (cmd : cmds') currentS cmdStack cl =
       trace3' cmds' (move cmd t currentS) cmdStack cl
-
--- Further Extensions
 
 -- Probabilistic LSystem:
 ------------------------------------------------------------------------------
