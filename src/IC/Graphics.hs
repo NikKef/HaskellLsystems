@@ -16,14 +16,6 @@ drawLines live !ls = do
   getArgsAndInitialize
   w <- createWindow "LSystems"
 
--- Sigh... Mac has a non-standard GLUT implementation and
--- it apparently doesn't support this, which means we can't
--- close the window. Oh well. This uses the CPP language extension,
--- which invokes the C preprocessor on the file, allowing us
--- to write C-style macros to control stuff. In this case, if
--- we are operating in OSX, this macro is defined, so the code
--- inside the if will be removed
--- Thanks to Ethan Range (esr20) for figuring this out!
 #ifndef darwin_HOST_OS
   actionOnWindowClose   $= ContinueExecution
 #endif
@@ -37,7 +29,6 @@ display :: Bool -> [ColouredLine] -> IO ()
 display live ls = do
   clear [ColorBuffer]
 
-  -- this is a space leak waiting to happen... annoying
   let verticesOf (from, to, _)     = [from, to]
       vertices                     = concatMap verticesOf ls
       ((minX, minY), (maxX, maxY)) = boundingBox vertices
@@ -47,14 +38,10 @@ display live ls = do
           (realToFrac minY) (realToFrac maxY)
           0 1
     if live then
-      -- this will render each line and flush it to the buffer
-      -- this allows you to watch the turtle go about its business
       forM_ ls $ \line -> do
         renderPrimitive Lines (lineVertices line)
         flush
     else
-      -- this will batch all lines and render them in one step
-      -- this will make an image just appear when finished (and much faster!)
       renderPrimitive Lines $
         forM_ ls $ \line ->
           lineVertices line
@@ -89,7 +76,7 @@ reshape s = do
   postRedisplay Nothing
 
 boundingBox :: [Vertex] -> (Vertex, Vertex)
-boundingBox [] = ((100, 100), (100, 100)) -- Keep a box, so its visible
+boundingBox [] = ((100, 100), (100, 100))
 boundingBox vs = foldl' f ((infinity, infinity), (-infinity, -infinity)) vs
   where f ((minX, minY), (maxX, maxY)) (x, y) =
             ((min minX x, min minY y), (max maxX x, max maxY y))
