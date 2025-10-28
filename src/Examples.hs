@@ -2,6 +2,54 @@ module Examples where
 
 import LSystems (LSystem(LSystem), ProbLSystem(ProbLSystem), LSystem3(LSystem3))
 
+cross, triangle, arrowHead    :: LSystem
+dragon, snowflake, tree, bush :: LSystem
+
+cross = LSystem 90 "M-M-M-M" [ ('M', "M-M+M+MM-M-M+M")
+                             , ('+', "+")
+                             , ('-', "-")
+                             ]
+
+triangle = LSystem 90 "-M" [ ('M', "M+M-M-M+M")
+                           , ('+', "+")
+                           , ('-', "-")
+                           ]
+
+arrowHead = LSystem 60 "N" [ ('M', "N+M+N")
+                           , ('N', "M-N-M")
+                           , ('+', "+")
+                           , ('-', "-")
+                           ]
+
+dragon = LSystem 45 "MX" [ ('M', "A")
+                         , ('X', "+MX--MY+")
+                         , ('Y', "-MX++MY-")
+                         , ('A', "A")
+                         , ('+', "+")
+                         , ('-', "-")
+                         ]
+
+snowflake = LSystem 60 "M--M--M" [ ('M', "M+M--M+M")
+                                 , ('+', "+")
+                                 , ('-', "-")
+                                 ]
+
+tree = LSystem 45 "M" [ ('M', "N[-M][+M][NM]")
+                      , ('N', "NN")
+                      , ('[', "[")
+                      , (']', "]")
+                      , ('+', "+")
+                      , ('-', "-")
+                      ]
+
+bush = LSystem 22.5 "X" [ ('X', "M-[[X]+X]+M[+MX]-X")
+                        , ('M', "MM")
+                        , ('[', "[")
+                        , (']', "]")
+                        , ('+', "+")
+                        , ('-', "-")
+                        ]
+
 -- Bush LSystem which implements probabilistic rewriting
 probBush :: ProbLSystem
 probBush = ProbLSystem 22.5 "X"
@@ -52,7 +100,7 @@ mandala3D = LSystem3 15 "A"
   , ('V',"^d&")
 
     -- unit arcs which (with the large amount of
-    -- Fs added create the "shere" look)
+    -- Fs added create the "sphere" look)
   , ('u',"F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F+F")
   , ('d',"F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F-F")
 
