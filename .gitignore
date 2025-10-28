@@ -32,3 +32,5 @@
 output.*
 
 dist-newstyle/
+
+.DS_Store
