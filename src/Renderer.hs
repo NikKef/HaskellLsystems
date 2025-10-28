@@ -3,7 +3,7 @@ module Renderer where
 import LSystems
 import IC.Colour
 import IC.Graphics
-import Examples -- to draw it in for REPL auto-import
+import Examples
 import System.Random(StdGen)
 
 drawLSystem1 :: Bool -> LSystem -> Int -> Colour -> IO ()
